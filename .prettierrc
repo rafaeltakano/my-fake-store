@@ -7,6 +7,7 @@
     "htmlWhitespaceSensitivity": "strict",
     "requireConfig": true,
     "endOfLine": "crlf",
-    "bracketSpacing": true
+    "bracketSpacing": true,
+    "printWidth": 100
   }
   
