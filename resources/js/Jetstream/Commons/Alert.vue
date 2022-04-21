@@ -23,12 +23,15 @@ defineProps({
           clip-rule="evenodd"
         ></path>
       </svg>
-      <h3 class="text-lg font-medium text-blue-700 dark:text-blue-800">
-        Please, refresh your browser
-      </h3>
+      <p class="text-lg font-medium text-blue-700 dark:text-blue-800">
+        {{ error }}
+      </p>
     </div>
     <div class="mt-2 mb-4 text-sm text-blue-700 dark:text-blue-800">
-      {{ error }}
+      <p>
+        Please, refresh your browser, sometimes the fakestoreapi refuses the conection, this is a
+        normal behavior.</p
+      >
     </div>
   </div>
 </template>
