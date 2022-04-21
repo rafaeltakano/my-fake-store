@@ -1,0 +1,12 @@
+{
+    "singleQuote": true,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": false,
+    "arrowParens": "always",
+    "htmlWhitespaceSensitivity": "strict",
+    "requireConfig": true,
+    "endOfLine": "crlf",
+    "bracketSpacing": true
+  }
+  
