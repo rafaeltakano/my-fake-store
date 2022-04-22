@@ -3,7 +3,7 @@
     <el-select class="select" v-model="value" filterable placeholder="Select">
       <el-option v-for="item in options" :key="item.id" :label="item.title" :value="item.id" />
     </el-select>
-    <Link v-if="value" :href="'#'" :data="{ value }">
+    <Link v-if="value" :href="route('product')" :data="{ id: value }">
       <SearchIcon class="w-6 h-6 text-gray-400 hover:text-gray-500" aria-hidden="true" />
     </Link>
     <div v-else>
@@ -34,6 +34,10 @@ defineProps({
 
 ::v-deep .el-input__inner {
   box-shadow: none;
+}
+
+::v-deep .el-select .el-input .el-select__caret.el-icon {
+  z-index: 0;
 }
 </style>
 
