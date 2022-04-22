@@ -21791,7 +21791,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/headlessui.esm.js");
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/XIcon.js");
-/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/PlusCircleIcon.js");
 
 
 
@@ -21811,12 +21810,7 @@ __webpack_require__.r(__webpack_exports__);
         subtotalPrice = subtotalPrice + value.price * value.quantity;
       });
       return subtotalPrice;
-    }; // onMounted(() => {
-    //   return {
-    //     products,
-    //   }
-    // })
-
+    };
 
     var __returned__ = {
       subtotal: subtotal,
@@ -21827,8 +21821,7 @@ __webpack_require__.r(__webpack_exports__);
       DialogTitle: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.DialogTitle,
       TransitionChild: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.TransitionChild,
       TransitionRoot: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.TransitionRoot,
-      XIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
-      PlusCircleIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"]
+      XIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,

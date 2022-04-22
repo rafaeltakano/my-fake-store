@@ -4,8 +4,7 @@ import { MenuIcon, SearchIcon, ShoppingBagIcon } from '@heroicons/vue/outline'
 import NavBarMobile from '@/Jetstream/NavBar/NavBarMobile.vue'
 import NavBarPopover from '@/Jetstream/NavBar/NavBarPopover.vue'
 import NavBarBag from '@/Jetstream/NavBar/NavBarBag.vue'
-import { createToast } from 'mosha-vue-toastify'
-import 'mosha-vue-toastify/dist/style.css'
+import Swal from 'sweetalert2'
 
 const open = ref(false)
 
@@ -14,6 +13,18 @@ const cart = ref(false)
 const cartProducts = ref([])
 
 const cartTrackNumber = ref(0)
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 1500,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  },
+})
 
 const addToCart = (item) => {
   const cart = cartProducts.value
@@ -35,17 +46,10 @@ const addToCart = (item) => {
 
   cartTrackNumber.value++
 
-  createToast(
-    {
-      title: 'Success!',
-      description: 'your item has been successfully added',
-    },
-    {
-      timeout: 1500,
-      position: 'top-center',
-      toastBackgroundColor: '#28a745',
-    }
-  )
+  Toast.fire({
+    icon: 'success',
+    title: 'your item has been successfully added',
+  })
 }
 
 const removeFromCart = (item) => {
@@ -53,16 +57,30 @@ const removeFromCart = (item) => {
   const product = { ...item }
 
   cartProducts.value = Object.values(cart).filter((value) => {
-    if (value.id !== product.id) {
-      return value
-    }
+    if (value.id !== product.id) return value
   })
 
-  if (product.quantity > cartTrackNumber.value) {
-    cartTrackNumber.value = 0
-  } else {
-    cartTrackNumber.value = cartTrackNumber.value - product.quantity
-  }
+  cartTrackNumber.value = cartTrackNumber.value - product.quantity
+
+  if (cartTrackNumber.value < 0) cartTrackNumber.value = 0
+}
+
+const checkout = () => {
+  if (cartProducts.value.length < 1)
+    return Swal.fire(
+      'Oops...',
+      'there should be at least one item in the bag to checkout 😅',
+      'warning'
+    )
+
+  cartProducts.value = []
+  cartTrackNumber.value = 0
+
+  Swal.fire(
+    'Checkout successfully!',
+    'please, try this demo out as much as you want! 😁',
+    'success'
+  )
 }
 
 defineProps({
@@ -134,6 +152,7 @@ onMounted(() => {
                     :open="cart"
                     @close="cart = false"
                     @remove-item="removeFromCart"
+                    @checkout="checkout"
                   />
                   <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
                     {{ cartTrackNumber }}
