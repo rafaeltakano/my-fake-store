@@ -1420,9 +1420,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }.blur-sm{
   --tw-blur: blur(4px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}.\!blur{
-  --tw-blur: blur(8px) !important;
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
 }.brightness-50{
   --tw-brightness: brightness(.5);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -1473,10 +1470,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 *::before, 
 *::after {
     font-family: var(--default-font-primary);
-}h1, h2,
-h3, h4,
-h5, h6 {
-    font-family: var(--default-font-secondary);
 }.first-letter\:uppercase::first-letter{
   text-transform: uppercase;
 }.hover\:border-gray-300:hover{
