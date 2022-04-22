@@ -22,12 +22,16 @@
         "postcss": "^8.1.14",
         "postcss-import": "^14.0.2",
         "tailwindcss": "^3.0.0",
+        "unplugin-auto-import": "^0.7.1",
+        "unplugin-element-plus": "^0.4.0",
+        "unplugin-vue-components": "^0.19.3",
         "vue": "^3.2.31",
         "vue-loader": "^17.0.0"
     },
     "dependencies": {
         "@headlessui/vue": "^1.5.0",
         "@heroicons/vue": "^1.0.6",
+        "element-plus": "^2.1.10",
         "sweetalert2": "^11.4.9",
         "vue-sweetalert2": "^5.0.2"
     }
