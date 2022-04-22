@@ -9,6 +9,7 @@ defineProps({
   isloading: Boolean,
   apiData: Object,
   apiErrors: String,
+  options: Array,
 })
 </script>
 
@@ -27,7 +28,7 @@ defineProps({
     </div>
 
     <div class="flex flex-col" v-else>
-      <NavBar :apiData="apiData" />
+      <NavBar :apiData="apiData" :options="options"/>
 
       <slot name="content"></slot>
     </div>

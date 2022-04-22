@@ -8,6 +8,8 @@ const apiData = ref([])
 
 const apiErrors = ref('')
 
+const options = ref([])
+
 const categories = async () => {
   const { data } = await axios.get('https://fakestoreapi.com/products/categories')
   return data
@@ -40,6 +42,8 @@ onMounted(async () => {
 
     apiData.value = await handleApi(cat, prod)
 
+    options.value = prod
+
     isloading.value = false
   } catch (exception) {
     apiErrors.value = exception
@@ -53,7 +57,13 @@ onMounted(async () => {
 })
 </script>
 <template>
-  <AppLayout title="Home" :isloading="isloading" :apiData="apiData" :apiErrors="apiErrors">
+  <AppLayout
+    title="Home"
+    :isloading="isloading"
+    :apiData="apiData"
+    :apiErrors="apiErrors"
+    :options="options"
+  >
     <template #content>
       <h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa, quaerat.</h1>
     </template>

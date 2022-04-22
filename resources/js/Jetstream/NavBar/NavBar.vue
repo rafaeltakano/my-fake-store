@@ -4,9 +4,12 @@ import { MenuIcon, SearchIcon, ShoppingBagIcon } from '@heroicons/vue/outline'
 import NavBarMobile from '@/Jetstream/NavBar/NavBarMobile.vue'
 import NavBarPopover from '@/Jetstream/NavBar/NavBarPopover.vue'
 import NavBarBag from '@/Jetstream/NavBar/NavBarBag.vue'
+import NavBarSearch from '@/Jetstream/NavBar/NavBarSearch.vue'
 import Swal from 'sweetalert2'
 
 const open = ref(false)
+
+const opt = ref('')
 
 const cart = ref(false)
 
@@ -85,15 +88,7 @@ const checkout = () => {
 
 defineProps({
   apiData: Object,
-})
-
-onMounted(() => {
-  return {
-    open,
-    cart,
-    cartProducts,
-    cartTrackNumber,
-  }
+  options: Array,
 })
 </script>
 
@@ -133,10 +128,7 @@ onMounted(() => {
             <div class="ml-auto flex items-center">
               <!-- Search -->
               <div class="flex lg:ml-6">
-                <a href="#" class="p-2 text-gray-400 hover:text-gray-500">
-                  <span class="sr-only">Search</span>
-                  <SearchIcon class="w-6 h-6" aria-hidden="true" />
-                </a>
+                <NavBarSearch :options="options" v-model="opt" />
               </div>
 
               <!-- Cart -->
