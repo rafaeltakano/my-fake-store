@@ -2,6 +2,21 @@
 import { PopoverGroup, Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import CommerceCard from '@/Jetstream/Commons/CommerceCard.vue'
 
+const emit = defineEmits()
+
+const addItem = (id, apiData) => {
+  let product = {}
+
+  Object.values(apiData).map((element) => {
+    return element.filter((item) => {
+      if (item.id === id) product = item
+      return item
+    })
+  })
+
+  emit('add-item', product)
+}
+
 defineProps({
   apiData: Object,
   open: Boolean,
@@ -54,6 +69,7 @@ defineProps({
                       :rate="product.rating.rate"
                       :price="product.price"
                       :blur="index < 2 ? false : true"
+                      @add-item="(id) => addItem(id, apiData)"
                     />
                   </div>
                 </div>

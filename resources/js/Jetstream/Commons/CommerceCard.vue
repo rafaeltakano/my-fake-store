@@ -18,7 +18,7 @@ const rateArr = (rate) => {
 
 <template>
   <div class="relative">
-    <div :class="blur == true ? 'blur-sm brightness-50 cursor-pointer' : ''">
+    <div :class="blur ? 'blur-sm brightness-50 cursor-pointer' : ''">
       <div class="max-w-sm bg-gray-100 rounded-lg shadow-md">
         <a>
           <img class="p-8 rounded-t-lg object-contain h-44 w-80" :src="image" alt="product image" />
@@ -52,8 +52,9 @@ const rateArr = (rate) => {
           <div class="flex justify-between items-center">
             <span class="text-3xl font-bold text-gray-900">${{ price }}</span>
             <a
-              :class="blur == true ? '' : 'hover:bg-indigo-800'"
+              :class="blur ? '' : 'hover:bg-indigo-800'"
               class="text-white bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer"
+              @click="blur ? null : $emit('add-item', id)"
             >
               Add to cart
             </a>

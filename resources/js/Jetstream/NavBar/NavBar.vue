@@ -1,152 +1,69 @@
 <script setup>
+import { ref, onMounted } from 'vue'
+import { MenuIcon, SearchIcon, ShoppingBagIcon } from '@heroicons/vue/outline'
 import NavBarMobile from '@/Jetstream/NavBar/NavBarMobile.vue'
 import NavBarPopover from '@/Jetstream/NavBar/NavBarPopover.vue'
-
-import { ref, onMounted } from 'vue'
-import {
-  Dialog,
-  DialogOverlay,
-  Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
-  Tab,
-  TabGroup,
-  TabList,
-  TabPanel,
-  TabPanels,
-  TransitionChild,
-  TransitionRoot,
-} from '@headlessui/vue'
-import { MenuIcon, SearchIcon, ShoppingBagIcon, XIcon } from '@heroicons/vue/outline'
-
-const navigation = {
-  categories: [
-    {
-      id: 'women',
-      name: 'Women',
-      featured: [
-        {
-          name: 'New Arrivals',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
-          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-        },
-        {
-          name: 'Basic Tees',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
-          imageAlt:
-            'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-        },
-      ],
-      sections: [
-        {
-          id: 'clothing',
-          name: 'Clothing',
-          items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Dresses', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Denim', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
-          ],
-        },
-        {
-          id: 'accessories',
-          name: 'Accessories',
-          items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' },
-          ],
-        },
-        {
-          id: 'brands',
-          name: 'Brands',
-          items: [
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Significant Other', href: '#' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'men',
-      name: 'Men',
-      featured: [
-        {
-          name: 'New Arrivals',
-          href: '#',
-          imageSrc:
-            'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
-          imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
-        },
-        {
-          name: 'Artwork Tees',
-          href: '#',
-          imageSrc:
-            'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
-          imageAlt:
-            'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
-        },
-      ],
-      sections: [
-        {
-          id: 'clothing',
-          name: 'Clothing',
-          items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
-          ],
-        },
-        {
-          id: 'accessories',
-          name: 'Accessories',
-          items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' },
-          ],
-        },
-        {
-          id: 'brands',
-          name: 'Brands',
-          items: [
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-          ],
-        },
-      ],
-    },
-  ],
-  pages: [
-    { name: 'Company', href: '#' },
-    { name: 'Stores', href: '#' },
-  ],
-}
+import NavBarBag from '@/Jetstream/NavBar/NavBarBag.vue'
+import { createToast } from 'mosha-vue-toastify'
+import 'mosha-vue-toastify/dist/style.css'
 
 const open = ref(false)
+
+const cart = ref(false)
+
+const cartProducts = ref([])
+
+const cartTrackNumber = ref(0)
+
+const addToCart = (item) => {
+  const cart = cartProducts.value
+  const product = { ...item }
+  let exists = false
+
+  Object.entries(cart).filter(([index, value]) => {
+    Object.keys(value).filter((item) => {
+      if (value[item] !== product.id) return item
+      cartProducts.value[index].quantity++
+      exists = true
+    })
+  })
+
+  if (!exists) {
+    product.quantity = 1
+    cartProducts.value.push(product)
+  }
+
+  cartTrackNumber.value++
+
+  createToast(
+    {
+      title: 'Success!',
+      description: 'your item has been successfully added',
+    },
+    {
+      timeout: 1500,
+      position: 'top-center',
+      toastBackgroundColor: '#28a745',
+    }
+  )
+}
+
+const removeFromCart = (item) => {
+  const cart = cartProducts.value
+  const product = { ...item }
+
+  cartProducts.value = Object.values(cart).filter((value) => {
+    if (value.id !== product.id) {
+      return value
+    }
+  })
+
+  if (product.quantity > cartTrackNumber.value) {
+    cartTrackNumber.value = 0
+  } else {
+    cartTrackNumber.value = cartTrackNumber.value - product.quantity
+  }
+}
 
 defineProps({
   apiData: Object,
@@ -154,8 +71,10 @@ defineProps({
 
 onMounted(() => {
   return {
-    navigation,
     open,
+    cart,
+    cartProducts,
+    cartTrackNumber,
   }
 })
 </script>
@@ -166,11 +85,6 @@ onMounted(() => {
     <NavBarMobile :apiData="apiData" :open="open" @close="open = false" />
 
     <header class="relative bg-white">
-      <p
-        class="bg-indigo-600 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8"
-        >Get free delivery on orders over $100</p
-      >
-
       <nav aria-label="Top" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="border-b border-gray-200">
           <div class="h-16 flex items-center">
@@ -196,7 +110,7 @@ onMounted(() => {
             </div>
 
             <!-- Flyout menus -->
-            <NavBarPopover :apiData="apiData" :open="open" />
+            <NavBarPopover :apiData="apiData" :open="open" @add-item="addToCart" />
 
             <div class="ml-auto flex items-center">
               <!-- Search -->
@@ -213,10 +127,17 @@ onMounted(() => {
                   <ShoppingBagIcon
                     class="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
+                    @click="cart = true"
                   />
-                  <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"
-                    >0</span
-                  >
+                  <NavBarBag
+                    :cartProducts="cartProducts"
+                    :open="cart"
+                    @close="cart = false"
+                    @remove-item="removeFromCart"
+                  />
+                  <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+                    {{ cartTrackNumber }}
+                  </span>
                   <span class="sr-only">items in cart, view bag</span>
                 </a>
               </div>
