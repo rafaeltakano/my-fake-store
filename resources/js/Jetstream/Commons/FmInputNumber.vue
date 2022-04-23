@@ -4,7 +4,7 @@ import { ElInputNumber } from 'element-plus'
 
 const num = ref(1)
 const handleChange = (value) => {
-  console.log(value)
+  //
 }
 </script>
 
