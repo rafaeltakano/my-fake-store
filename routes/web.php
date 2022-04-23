@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -21,3 +22,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Product
 Route::get('/product', [ProductController::class, 'index'])->name('product');
+
+// Categories
+Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');

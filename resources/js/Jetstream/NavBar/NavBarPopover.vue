@@ -68,6 +68,7 @@ defineProps({
                       :product="product.title"
                       :rate="product.rating.rate"
                       :price="product.price"
+                      :category="product.category"
                       :blur="index < 2 ? false : true"
                       @add-item="(id) => addItem(id, apiData)"
                     />
