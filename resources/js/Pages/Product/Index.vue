@@ -19,6 +19,7 @@ const clearFilters = (product) => {
 onMounted(async () => {
   try {
     product.value = await productsById(toRaw(props.id))
+    product.value.quantity = 0
   } catch (exception) {
     Swal.fire(exception, 'Please, refresh the page, somethimes this happens 😅', 'warning')
   }
