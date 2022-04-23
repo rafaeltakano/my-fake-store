@@ -1,3 +1,7 @@
+<script setup>
+import { Link } from '@inertiajs/inertia-vue3'
+</script>
+
 <template>
   <div class="bg-white">
     <!-- Mobile menu -->
@@ -12,14 +16,14 @@
 
             <!-- Logo -->
             <div class="ml-4 flex lg:ml-0">
-              <a href="/">
+              <Link :href="route('home')">
                 <span class="sr-only">Workflow</span>
                 <img
                   class="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
                   alt=""
                 />
-              </a>
+              </Link>
             </div>
 
             <!-- Flyout menus -->

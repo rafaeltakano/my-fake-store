@@ -1,11 +1,7 @@
 <script setup>
-import {
-  Dialog,
-  DialogOverlay,
-  TransitionChild,
-  TransitionRoot,
-} from '@headlessui/vue'
+import { Dialog, DialogOverlay, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XIcon } from '@heroicons/vue/outline'
+import { Link } from '@inertiajs/inertia-vue3'
 
 const featured = [
   {
@@ -102,9 +98,13 @@ defineProps({
                 class="mt-6 flex flex-col space-y-6"
               >
                 <li v-for="(product, index) in category" :key="index" class="flow-root">
-                  <a :href="'#'" class="-m-2 p-2 block text-gray-500">
+                  <Link
+                    :href="route('product')"
+                    :data="{ id: product.id }"
+                    class="-m-2 p-2 block text-gray-500"
+                  >
                     {{ product.title }}
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

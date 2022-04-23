@@ -1,6 +1,7 @@
 <script setup>
 import { PlusCircleIcon } from '@heroicons/vue/outline'
 import Rating from '@/Jetstream/Commons/Rating.vue'
+import { Link } from '@inertiajs/inertia-vue3'
 
 defineProps({
   id: Number,
@@ -16,15 +17,15 @@ defineProps({
   <div class="relative">
     <div :class="blur ? 'blur-sm brightness-50 cursor-pointer' : ''">
       <div class="max-w-sm bg-gray-100 rounded-lg shadow-md">
-        <a>
+        <Link :href="route('product')" :data="{ id: id }">
           <img class="p-8 rounded-t-lg object-contain h-44 w-80" :src="image" alt="product image" />
-        </a>
+        </Link>
         <div class="px-5 pb-5">
-          <a>
+          <Link :href="route('product')" :data="{ id: id }">
             <h5 class="text-xl font-semibold tracking-tight text-gray-900 text-nowrap-ellipsis">
               {{ product }}
             </h5>
-          </a>
+          </Link>
           <Rating :rate="rate" />
           <div class="flex justify-between items-center">
             <span class="text-3xl font-bold text-gray-900">${{ price }}</span>
