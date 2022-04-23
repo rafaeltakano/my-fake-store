@@ -28,7 +28,7 @@ defineProps({
 
 <template>
   <TransitionRoot as="template" :show="open">
-    <Dialog as="div" class="fixed inset-0 overflow-hidden" @close="$emit('close')">
+    <Dialog as="div" class="fixed inset-0 overflow-hidden z-10" @close="$emit('close')">
       <div class="absolute inset-0 overflow-hidden">
         <TransitionChild
           as="template"
