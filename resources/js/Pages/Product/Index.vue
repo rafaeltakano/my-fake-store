@@ -1,69 +1,26 @@
 <script setup>
-import { ref, onMounted, isProxy, toRaw } from 'vue'
+import { ref, onMounted, toRaw } from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import Rating from '@/Jetstream/Commons/Rating.vue'
 import FmInputNumber from '@/Jetstream/Commons/FmInputNumber.vue'
-
-const isloading = ref(false)
-
-const apiData = ref([])
-
-const apiErrors = ref('')
+import Swal from 'sweetalert2'
 
 const product = ref({ quantity: 0 })
-
-const options = ref([])
-
-const categories = async () => {
-  const { data } = await axios.get('https://fakestoreapi.com/products/categories')
-  return data
-}
-
-const products = async () => {
-  const { data } = await axios.get('https://fakestoreapi.com/products')
-  return data
-}
 
 const productsById = async (productID) => {
   const { data } = await axios.get(`https://fakestoreapi.com/products/${productID}`)
   return data
 }
 
-const handleApi = async (categories, products) => {
-  let treatedApi = new Object()
-
-  categories.filter((item) => {
-    treatedApi[item] = new Array()
-  })
-
-  Object.values(products).filter((item) => {
-    treatedApi[item.category].push(item)
-  })
-
-  return treatedApi
+const clearFilters = (product) => {
+  product.quantity = 0
 }
 
 onMounted(async () => {
   try {
-    isloading.value = true
-
-    const [cat, prod] = await Promise.all([categories(), products()])
-
-    apiData.value = await handleApi(cat, prod)
-
     product.value = await productsById(toRaw(props.id))
-
-    options.value = prod
-
-    isloading.value = false
   } catch (exception) {
-    apiErrors.value = exception
-  } finally {
-    return {
-      isloading,
-      apiData,
-      apiErrors,
-    }
+    Swal.fire(exception, 'Please, refresh the page, somethimes this happens 😅', 'warning')
   }
 })
 
@@ -73,14 +30,8 @@ const props = defineProps({
 </script>
 
 <template>
-  <AppLayout
-    :title="product?.title || 'Product'"
-    :isloading="isloading"
-    :apiData="apiData"
-    :apiErrors="apiErrors"
-    :options="options"
-  >
-    <template #content>
+  <AppLayout :title="product?.title || 'Product'" :storeProduct="toRaw(product)">
+    <template #content="{ addProduct }">
       <section :id="`section-product-${product?.id}`">
         <div class="product-container">
           <div class="product-img-container">
@@ -106,7 +57,8 @@ const props = defineProps({
               </div>
               <button
                 class="button text-white bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer w-full"
-                @click="$emit('add-item', product.id)"
+                @click=";[addProduct(product), clearFilters(product)]"
+                :disabled="product?.quantity > 0 ? false : true"
               >
                 Add to cart
               </button>
