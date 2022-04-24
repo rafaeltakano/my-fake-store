@@ -162,6 +162,7 @@ const props = defineProps({
 
 .image {
   max-height: 350px;
+  width: auto;
 }
 
 .button-wrapper {
