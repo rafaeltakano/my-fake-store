@@ -19,7 +19,7 @@ defineProps({
     <div class="relative">
       <div class="blur-sm brightness-50 cursor-pointer">
         <div class="max-w-sm bg-gray-100 rounded-lg shadow-md">
-          <Link :href="route('product')" :data="{ id: id }">
+          <Link :href="route('categories')" :data="{ category: category }">
             <img
               class="p-8 rounded-t-lg object-contain h-44 w-80"
               :src="image"
@@ -27,7 +27,7 @@ defineProps({
             />
           </Link>
           <div class="px-5 pb-5">
-            <Link :href="route('product')" :data="{ id: id }">
+            <Link :href="route('categories')" :data="{ category: category }">
               <h5 class="text-xl font-semibold tracking-tight text-gray-900 text-nowrap-ellipsis">
                 {{ product }}
               </h5>
