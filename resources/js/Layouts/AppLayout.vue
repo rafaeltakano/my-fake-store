@@ -60,7 +60,7 @@
       </div>
 
       <footer id="viewport-footer">
-        <div class="footer bg-indigo-600 p-4 text-white mt-16 py-4">
+        <div class="footer bg-indigo-600 text-white mt-16 max-w-7xl mx-auto p-4 sm:px-6 lg:px-8">
           <div class="brand">
             <h1 class="font-bold"> © Rafael Takano </h1>
             <ul class="ul">
