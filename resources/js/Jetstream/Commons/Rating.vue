@@ -13,7 +13,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="flex items-center mt-2.5 mb-5">
+  <div class="flex items-center">
     <svg
       v-for="(stars, index) in rateArr(rate ?? 0)"
       :key="index"
