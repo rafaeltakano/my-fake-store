@@ -19,12 +19,10 @@ defineProps({
     <div class="relative">
       <div class="blur-sm brightness-50 cursor-pointer">
         <div class="max-w-sm bg-gray-100 rounded-lg shadow-md">
-          <Link :href="route('categories')" :data="{ category: category }">
-            <img
-              class="p-8 rounded-t-lg object-contain h-44 w-80"
-              :src="image"
-              alt="product image"
-            />
+          <Link class="product-image" :href="route('categories')" :data="{ category: category }">
+            <div class="circular--landscape">
+              <img class="image" :src="image" alt="product image" />
+            </div>
           </Link>
           <div class="px-5 pb-5">
             <Link :href="route('categories')" :data="{ category: category }">
@@ -54,8 +52,10 @@ defineProps({
   <div class="relative" v-else>
     <div>
       <div class="max-w-sm bg-gray-100 rounded-lg shadow-md">
-        <Link :href="route('product')" :data="{ id: id }">
-          <img class="p-8 rounded-t-lg object-contain h-44 w-80" :src="image" alt="product image" />
+        <Link class="product-image" :href="route('product')" :data="{ id: id }">
+          <div class="circular--landscape">
+            <img class="image" :src="image" alt="product image" />
+          </div>
         </Link>
         <div class="px-5 pb-5">
           <Link :href="route('product')" :data="{ id: id }">
@@ -91,6 +91,29 @@ defineProps({
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.product-image {
+  border-radius: 1rem;
+  min-height: 150px;
+  min-width: 150px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+}
+
+.circular--landscape {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  overflow: hidden;
+}
+
+.image {
+  height: 150px;
+  width: 150px;
+  background-color: #ffffff;
 }
 </style>
 
