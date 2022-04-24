@@ -29,6 +29,10 @@ const options = ref([
 ])
 
 const fetchProducts = async () => {
+  if (sessionStorage.getItem('sessionProducts')) {
+    return JSON.parse(sessionStorage.getItem('sessionProducts'))
+  }
+
   const { data } = await axios.get('https://fakestoreapi.com/products')
   return data
 }
@@ -36,6 +40,7 @@ const fetchProducts = async () => {
 const sortByCategories = () => {
   if (toRaw(radio.value) == 'all') {
     productsView.value = [...toRaw(products.value)]
+    sortByOptions()
     return true
   }
 
@@ -163,6 +168,12 @@ onMounted(async () => {
   height: 200px;
   width: 200px;
   background-color: #ffffff;
+  transition: all 0.5s;
+}
+
+.image:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
 }
 
 .img-wrapper {
