@@ -205,6 +205,8 @@ const checkout = () => {
 
   cartProducts.value = []
   cartTrackNumber.value = 0
+  sessionStorage.setItem('sessionCart', '')
+  sessionStorage.setItem('sessionCartTrackNumber', 0)
 
   Swal.fire(
     'Checkout successfully!',
