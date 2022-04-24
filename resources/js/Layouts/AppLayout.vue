@@ -58,6 +58,37 @@
       <div class="viewport__content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <slot name="content" :addProduct="addToCart"> </slot>
       </div>
+
+      <footer id="viewport-footer">
+        <div class="footer bg-indigo-600 p-4 text-white mt-16 py-4">
+          <div class="brand">
+            <h1 class="font-bold"> © Rafael Takano </h1>
+            <ul class="ul">
+              <li>
+                <a href="https://www.linkedin.com/in/rafaeltakano1/" target="_blank">Linkedin</a>
+              </li>
+            </ul>
+          </div>
+          <div class="information">
+            <h1 class="font-bold"> Information </h1>
+            <ul class="ul">
+              <li>About Us</li>
+              <li>Contact Us</li>
+              <li>Terms & Condictions</li>
+              <li>Privacy Policy</li>
+            </ul>
+          </div>
+          <div class="social-media">
+            <h1 class="font-bold"> Social Media </h1>
+            <ul class="ul">
+              <li>Instagram</li>
+              <li>Twitter</li>
+              <li>Facebook</li>
+              <li>Tiktok</li>
+            </ul>
+          </div>
+        </div>
+      </footer>
     </div>
   </div>
 </template>
@@ -215,6 +246,10 @@ const checkout = () => {
   )
 }
 
+const cacheProducts = (prod) => {
+  return sessionStorage.setItem('sessionProducts', JSON.stringify(prod))
+}
+
 onMounted(async () => {
   try {
     isloading.value = true
@@ -226,6 +261,8 @@ onMounted(async () => {
     options.value = prod
 
     handleCart()
+
+    cacheProducts(prod)
 
     isloading.value = false
   } catch (exception) {
@@ -254,6 +291,23 @@ const props = defineProps({
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.footer li {
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 </style>
 
