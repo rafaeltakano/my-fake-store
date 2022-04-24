@@ -53,7 +53,7 @@ defineProps({
           leave-from-class="opacity-100"
           leave-to-class="opacity-0"
         >
-          <PopoverPanel class="absolute top-full inset-x-0 text-sm text-gray-500">
+          <PopoverPanel class="absolute top-full inset-x-0 text-sm text-gray-500 z-10">
             <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
             <div class="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
 
