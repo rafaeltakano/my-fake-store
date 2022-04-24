@@ -224,6 +224,9 @@ const removeFromCart = (item) => {
   cartTrackNumber.value = cartTrackNumber.value - product.quantity
 
   if (cartTrackNumber.value < 0) cartTrackNumber.value = 0
+
+  sessionStorage.setItem('sessionCart', JSON.stringify(cartProducts.value))
+  sessionStorage.setItem('sessionCartTrackNumber', JSON.stringify(cartTrackNumber.value))
 }
 
 const checkout = () => {
