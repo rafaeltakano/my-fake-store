@@ -72,6 +72,10 @@ const props = defineProps({
               <a class="count"> ({{ product?.rating?.count }} ratings) </a>
             </div>
 
+            <div class="product-container__rating my-4">
+              <h3 class="font-bold">${{ product?.price }}</h3>
+            </div>
+
             <div class="product-container__colors my-4">
               <h3 class="font-bold">Colors: <span class="font-normal">(display only)</span></h3>
               <div class="colors px-4 py-2">
